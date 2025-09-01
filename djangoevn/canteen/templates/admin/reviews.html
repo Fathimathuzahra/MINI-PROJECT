@@ -1,0 +1,46 @@
+{% extends 'admin/admin_base.html' %}
+
+{% block title %}Admin Reviews | College Canteen{% endblock %}
+
+{% block content %}
+<div class="container mt-5 text-white">
+    <h2 class="text-center mb-4 text-warning">💬 User Reviews</h2>
+
+    {% if reviews %}
+    <div class="table-responsive">
+        <table class="table table-dark table-striped table-bordered text-center">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Rating</th>
+                    <th>Comment</th>
+                    <th>Visible</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for review in reviews %}
+                <tr>
+                    <td>{{ review.user.username }}</td>
+                    <td>{{ review.rating }}</td>
+                    <td>{{ review.comment }}</td>
+                    <td>{{ review.visible }}</td>
+                    <td>
+                        <form method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="review_id" value="{{ review.id }}">
+                            <button type="submit" class="btn btn-sm btn-warning">
+                                {% if review.visible %}Hide{% else %}Show{% endif %}
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+        <p class="text-center mt-3">No reviews available.</p>
+    {% endif %}
+</div>
+{% endblock %}

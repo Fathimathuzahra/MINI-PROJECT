@@ -1,0 +1,91 @@
+{% extends 'admin/admin_base.html' %}
+{% load static %}
+
+{% block title %}Admin Dashboard | College Canteen{% endblock %}
+
+{% block content %}
+<section class="food_section layout_padding-bottom">
+  <div class="container">
+
+    <style>
+      .btn-primary {
+        background: linear-gradient(135deg, #1e90ff, #007bff);
+        border: none;
+        color: white;
+        box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
+        transition: 0.3s ease-in-out;
+      }
+      .btn-primary:hover {
+        background: #0056b3;
+        box-shadow: 0 6px 18px rgba(0, 123, 255, 0.6);
+        color: white;
+      }
+      .box {
+        background-color: #1e1e26;
+        color: #fff;
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+      .box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 123, 255, 0.5);
+      }
+      .detail-box h5, .detail-box p, .detail-box h6 {
+        color: #fff;
+      }
+      .img-box img {
+        border-radius: 12px;
+      }
+    </style>
+
+    <!-- Heading -->
+    <h2>Welcome, {{ request.user.username }}</h2>
+    <p class="text-muted">Here’s a quick overview and access to manage today’s menu.</p>
+
+    <!-- Quick Links -->
+    <div class="mb-4">
+      <a href="{% url 'view_menu' %}" class="btn btn-primary">📋 View Menu</a>
+      <a href="{% url 'tokens_today' %}" class="btn btn-warning">🎟 Tokens Today</a>
+      <a href="{% url 'admin_reports' %}" class="btn btn-info">📊 Reports</a>
+    </div>
+
+    <!-- Category Shortcuts -->
+    <div class="mb-4">
+      <a href="{% url 'view_menu_by_type' 'breakfast' %}" class="btn btn-outline-light">🍳 Breakfast</a>
+      <a href="{% url 'view_menu_by_type' 'lunch' %}" class="btn btn-outline-light">🍛 Lunch</a>
+      <a href="{% url 'view_menu_by_type' 'snacks' %}" class="btn btn-outline-light">🥪 Snacks</a>
+      <a href="{% url 'view_menu_by_type' 'drinks' %}" class="btn btn-outline-light">🥤 Drinks</a>
+    </div>
+
+    <!-- Menu Items Preview -->
+    <h3 class="mt-4">Today's Menu - {{ selected_type|default:"All" }}</h3>
+    <div class="row">
+      {% for item in menus %}
+      <div class="col-sm-6 col-lg-4 mb-4">
+        <div class="box shadow p-3 rounded text-center">
+
+          <!-- Image -->
+          <div class="img-box mb-3">
+            {% if item.image %}
+              <img src="{{ item.image.url }}" alt="{{ item.name }}" class="img-fluid" style="max-height:200px;">
+            {% else %}
+              <img src="{% static 'images/default-menu.jpg' %}" alt="Default" class="img-fluid" style="max-height:200px;">
+            {% endif %}
+          </div>
+
+          <!-- Details -->
+          <div class="detail-box">
+            <h5>{{ item.name }}</h5>
+            <p>{{ item.description }}</p>
+            <h6 class="fw-bold">₹ {{ item.price }}</h6>
+          </div>
+
+        </div>
+      </div>
+      {% empty %}
+        <p class="text-center text-warning">No menu items available today.</p>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+{% endblock %}
