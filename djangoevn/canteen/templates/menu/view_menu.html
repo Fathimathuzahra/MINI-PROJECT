@@ -1,0 +1,46 @@
+{% extends "customer/user_base.html" %} 
+{% load static %}
+
+{% block title %}Menu | College Canteen{% endblock %}
+
+{% block content %}
+<section class="food_section layout_padding-bottom">
+  <div class="container">
+    <div class="heading_container heading_center">
+      <h2 class="text-white">🍽️ College Canteen Menu</h2>
+      <p class="text-muted">Browse by category</p>
+    </div>
+
+    {% for category, items in categorized_items.items %}
+      <h3 class="text-warning mt-5">{{ category }}</h3>
+      <div class="row">
+        {% for item in items %}
+          <div class="col-md-4 mb-4">
+            <div class="card h-100 bg-dark text-white shadow-lg rounded-3">
+              {% if item.image %}
+                <img src="{{ item.image.url }}" class="card-img-top rounded-top" alt="{{ item.name }}">
+              {% else %}
+                <img src="{% static 'images/default_food.jpg' %}" class="card-img-top rounded-top" alt="default">
+              {% endif %}
+
+              <div class="card-body">
+                <h5 class="card-title fw-bold">{{ item.name }}</h5>
+                {% if item.description %}
+                  <p class="card-text">{{ item.description }}</p>
+                {% endif %}
+                <p class="fw-bold text-success">₹{{ item.price }}</p>
+
+                {% if request.user.role == "student" %}
+                  <a href="{% url 'cart_add' item.id %}" class="btn btn-warning w-100">Add to Cart</a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% empty %}
+      <p class="text-muted">No items found in this category.</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
