@@ -1,0 +1,212 @@
+/* Global Reset and Font */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../images/dark1.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: #ffffff;
+}
+
+/* Header Section */
+.header_section {
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 20px 0;
+  border-bottom: 1px solid #444;
+}
+
+.navbar-brand {
+  font-family: 'Dancing Script', cursive;
+  font-size: 32px;
+  color: #ffbe33;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.navbar-brand img {
+  width: 40px;
+  margin-right: 10px;
+}
+
+.navbar-nav .nav-link {
+  color: #ffffff;
+  margin: 0 10px;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+  color: #ffbe33;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* HERO AREA BEAUTIFY */
+
+.hero_area {
+    background: "{% static 'images/hero-bg.jpg' %}" no-repeat center center/cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+    position: relative;
+}
+
+
+
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero-content h1 {
+  font-size: 56px;
+  font-weight: 700;
+  color: #ffbe33;
+  font-family: 'Dancing Script', cursive;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.8);
+}
+
+.hero-content p {
+  font-size: 20px;
+  line-height: 1.6;
+  color: #dddddd;
+  margin-bottom: 30px;
+}
+
+/* BEAUTIFUL BUTTON */
+.hero-content .btn-warning {
+  background-color: #ffbe33;
+  color: #000000;
+  border: none;
+  font-size: 18px;
+  padding: 12px 30px;
+  border-radius: 50px;
+  box-shadow: 0 5px 15px rgba(255, 190, 51, 0.5);
+  transition: all 0.3s ease-in-out;
+}
+
+.hero-content .btn-warning:hover {
+  background-color: #ffc107;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 190, 51, 0.7);
+}
+
+/* OUR MENU HEADING */
+.heading_container.heading_center h2 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 48px;
+  font-weight: 700;
+  color: #ffbe33;
+  margin-top: 80px;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+}
+
+/* MAKE ENTIRE PAGE MORE SPACED */
+section {
+  padding: 60px 20px;
+}
+
+/* OPTIONAL: Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+
+
+
+
+
+
+
+/* Footer Section */
+.footer_section {
+  background-color: rgba(0, 0, 0, 0.85);
+  color: #ffffff;
+  padding: 40px 0;
+  text-align: center;
+}
+
+.footer_section h5 {
+  font-size: 20px;
+  color: #ffbe33;
+  margin-bottom: 20px;
+}
+
+.footer-contact {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-contact li {
+  margin: 10px 0;
+  font-size: 14px;
+  color: #dddddd;
+}
+
+.footer-contact i {
+  margin-right: 8px;
+  color: #ffbe33;
+}
+
+.footer-info {
+  margin-top: 20px;
+  font-size: 13px;
+  color: #aaa;
+}
+
+/* Button Customizations */
+.btn-warning {
+  background-color: #ffbe33;
+  border: none;
+  color: #000;
+  transition: all 0.3s ease;
+}
+
+.btn-warning:hover {
+  background-color: #e6a000;
+  color: #000;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 32px;
+  }
+
+  .navbar-nav {
+    flex-direction: column;
+  }
+
+  .navbar-nav .nav-link {
+    margin: 10px 0;
+  }
+}
