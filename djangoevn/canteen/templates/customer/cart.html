@@ -1,0 +1,53 @@
+{% extends 'customer/user_base.html' %}
+
+{% block title %}My Cart{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4 text-warning">Your Cart</h2>
+
+    {% if items %}
+    <div class="table-responsive">
+        <table class="table table-dark table-striped table-bordered text-center">
+            <thead>
+                <tr>
+                    <th>Item Name</th>
+                    <th>Quantity</th>
+                    <th>Price (₹)</th>
+                    <th>Subtotal (₹)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in items %}
+                <tr>
+                    <td>{{ entry.item.name }}</td>
+                    <td>{{ entry.quantity }}</td>
+                    <td>{{ entry.item.price }}</td>
+                    <td>{{ entry.total }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Cart actions -->
+    <div class="text-center mt-4">
+        <a href="{% url 'cart_clear' %}" class="btn btn-danger me-2">Clear Cart</a>
+        <a href="{% url 'checkout' 'breakfast' %}" class="btn btn-warning me-2">Checkout Breakfast</a>
+        <a href="{% url 'checkout' 'lunch' %}" class="btn btn-warning me-2">Checkout Lunch</a>
+        <a href="{% url 'checkout' 'snacks' %}" class="btn btn-warning me-2">Checkout Snacks</a>
+        <a href="{% url 'checkout' 'drinks' %}" class="btn btn-warning">Checkout Drinks</a>
+    </div>
+
+    <div class="text-end mt-4">
+        <h4 class="text-light">Total: ₹{{ total }}</h4>
+    </div>
+
+    {% else %}
+    <p class="text-center text-light">Your cart is empty. 🛒</p>
+    <div class="text-center mt-3">
+        <a href="{% url 'view_menu' %}" class="btn btn-outline-light">Browse Menu</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

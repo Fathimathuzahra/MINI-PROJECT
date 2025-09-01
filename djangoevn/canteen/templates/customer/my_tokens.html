@@ -1,0 +1,47 @@
+{% extends 'customer/user_base.html' %}
+
+{% block title %}My Tokens{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4 text-warning">My Meal Tokens</h2>
+
+    {% if tokens %}
+    <div class="table-responsive">
+        <table class="table table-dark table-striped table-bordered text-center">
+            <thead>
+                <tr>
+                    <th>Token Code</th>
+                    <th>Meal Type</th>
+                    <th>Status</th>
+                    <th>Order Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for token in tokens %}
+                <tr>
+                    <td>{{ token.code }}</td>
+                    <td>{{ token.meal_type|title }}</td>
+                    <td>
+                        {% if token.status == 'USED' %}
+                            <span class="badge bg-success">Used</span>
+                        {% elif token.status == 'COMPLETED' %}
+                            <span class="badge bg-secondary">Completed</span>
+                        {% else %}
+                            <span class="badge bg-warning text-dark">Pending</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ token.order.created_at|date:"d M Y H:i" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p class="text-center text-light">You have no tokens yet.</p>
+    {% endif %}
+
+   <a href="{% url 'view_menu' %}" class="btn btn-warning btn-lg">Order Now</a>
+
+</div>
+{% endblock %}

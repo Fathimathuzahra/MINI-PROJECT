@@ -1,0 +1,30 @@
+{% extends 'customer/customer_base.html' %}
+
+{% block title %}Reviews{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4 text-warning">Customer Reviews</h2>
+
+    {% if reviews %}
+        {% for review in reviews %}
+        <div class="card bg-secondary text-white mb-3 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">{{ review.user.username }} 
+                    <span class="badge bg-warning text-dark">★{{ review.rating }}</span>
+                </h5>
+                <p class="card-text">{{ review.comment }}</p>
+                <small class="text-muted">{{ review.created_at|date:"d M Y H:i" }}</small>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p class="text-center text-light">No reviews available yet.</p>
+    {% endif %}
+
+    <div class="text-center mt-4">
+        <a href="{% url 'daily_menu' %}" class="btn btn-warning me-2">Order Now</a>
+        <a href="{% url 'user_dashboard' %}" class="btn btn-outline-light">Back to Dashboard</a>
+    </div>
+</div>
+{% endblock %}
