@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Logged Out | College Canteen</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      color: #fff;
+    }
+
+    .logout-box {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 40px 30px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+      max-width: 400px;
+      width: 100%;
+    }
+
+    .logout-box h1 {
+      font-weight: 600;
+      margin-bottom: 20px;
+      font-size: 24px;
+      color: #fff;
+    }
+
+    .logout-box p {
+      color: #ccc;
+      margin-bottom: 25px;
+      font-size: 15px;
+    }
+
+    .btn-custom {
+      background-color: #00d2ff;
+      color: #000;
+      padding: 10px 25px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: 0.3s;
+      display: inline-block;
+    }
+
+    .btn-custom:hover {
+      background-color: #00a8cc;
+    }
+  </style>
+</head>
+<body>
+  <div class="logout-box">
+     {% csrf_token %}
+    <h1>You’ve been logged out</h1>
+    <p>Thanks for visiting the Canteen Portal.</p>
+    <a href="{% url 'login' %}" class="btn-custom">Login Again</a>
+  </div>
+</body>
+</html>

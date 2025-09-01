@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>College Canteen</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600;700&display=swap">
+    <style>
+        body { margin: 0; font-family: 'Poppins', sans-serif; background-color: #121216; color: #fff; }
+        .navbar { display: flex; justify-content: space-between; align-items: center; background-color: #0e0d11; padding: 15px 30px; position: sticky; top: 0; z-index: 999; }
+        .navbar .brand { font-family: 'Great Vibes', cursive; font-size: 30px; color: #fcb900; text-decoration: none; }
+        .navbar ul { list-style: none; display: flex; gap: 25px; margin: 0; padding: 0; }
+        .navbar ul li a { color: #fff; text-decoration: none; font-weight: 500; transition: color 0.3s ease; }
+        .navbar ul li a:hover { color: #fcb900; }
+        .hero_area { background: url('{% static "images/dark1.jpg" %}') no-repeat center center/cover; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        .hero_area h1 { font-size: 4rem; font-weight: 700; margin: 0; color: #fff; }
+        .hero_area p { font-size: 1.2rem; margin: 20px 0; color: #ddd; max-width: 700px; }
+        .hero_area .btn { background-color: #fcb900; color: #121216; padding: 12px 30px; border-radius: 30px; text-decoration: none; font-weight: 600; }
+        .hero_area .btn:hover { background-color: #e5a700; color: #000; }
+        .footer { background-color: #0e0d11; text-align: center; padding: 20px; font-size: 0.9rem; color: #aaa; margin-top: 50px; }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="{% url 'index' %}" class="brand">Our College Canteen</a>
+        <ul>
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'view_menu' %}"> Menu</a></li>  <!-- ✅ updated -->
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero_area">
+        <h1>Fresh Flavors &<br> Friendly Faces</h1>
+        <p>Discover the perfect blend of taste, speed, and service — only at AWH Canteen!</p>
+        <a href="{% url 'view_menu' %}" class="btn">Order Now</a> <!-- ✅ updated -->
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        © 2025 AWH College Canteen. All rights reserved.
+    </footer>
+
+</body>
+</html>

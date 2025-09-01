@@ -1,0 +1,145 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>About Us - College Canteen</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: #121216;
+            color: #fff;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #0e0d11;
+            padding: 15px 30px;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        .navbar .brand {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .navbar .brand img {
+            height: 50px;
+            margin-right: 12px;
+            border-radius: 8px;
+        }
+
+        .navbar .brand span {
+            font-family: 'Great Vibes', cursive;
+            font-size: 30px;
+            color: #fcb900;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .navbar ul li a:hover {
+            color: #fcb900;
+        }
+
+        /* About Section */
+        .about-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .about-section h1 {
+            font-family: 'Great Vibes', cursive;
+            color: #fcb900;
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .about-section p {
+            max-width: 800px;
+            font-size: 1.1rem;
+            color: #ccc;
+            line-height: 1.7;
+        }
+
+        .about-section .btn {
+            margin-top: 30px;
+            background-color: #fcb900;
+            color: #121216;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .about-section .btn:hover {
+            background-color: #e5a700;
+            color: #000;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #0e0d11;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="/" class="brand">
+            <img src="{% static 'images/logo.jpg' %}" alt="Logo">
+            <span>Our College Canteen</span>
+        </a>
+        
+    </nav>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <h1>About Our Canteen</h1>
+        <p>
+            Welcome to the heart of our college — the AWH College Canteen! <br><br>
+            Our canteen is more than just a place to eat; it's where friends meet, ideas spark, and memories are made.
+            We serve a wide variety of delicious and hygienic meals prepared fresh every day to keep our students,
+            staff, and faculty energized and happy. <br><br>
+            From quick bites between classes to full hearty meals, our menu has something for everyone.
+            We are committed to quality, taste, and service excellence.
+        </p>
+        <a href="/" class="btn">Back to Home</a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        © 2025 AWH College Canteen. All rights reserved.
