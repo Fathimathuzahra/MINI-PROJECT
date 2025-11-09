@@ -1,0 +1,226 @@
+{% extends "admin/admin_base.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+/* ====== PAGE CONTAINER ====== */
+.container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 25px;
+    background: #FFF8F0;
+    border-radius: 15px;
+    box-shadow: 0 6px 25px rgba(0,0,0,0.1);
+    color: #5C3A21;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* ====== HEADER ====== */
+header h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #A0522D;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+header p.description {
+    text-align: center;
+    color: #7A5A40;
+    font-size: 1rem;
+    margin-bottom: 30px;
+}
+
+/* ====== CATEGORY ====== */
+.category-header {
+    margin: 30px 0 15px 0;
+    padding: 12px 18px;
+    background: #FBEEDD;
+    border-left: 5px solid #A0522D;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #A0522D;
+}
+
+/* ====== TABLE ====== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 25px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+thead {
+    background: #F7E6D0;
+}
+thead th {
+    color: #5C3A21;
+    padding: 12px;
+    text-align: left;
+    font-size: 0.95rem;
+}
+
+tbody tr {
+    background: #FFF8F0;
+    transition: 0.3s;
+}
+tbody tr:hover {
+    background: #FBEEDD;
+}
+
+td {
+    padding: 12px;
+    font-size: 0.9rem;
+    vertical-align: middle;
+}
+
+/* ====== IMAGE ====== */
+.menu-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 2px solid #F7E6D0;
+}
+
+/* ====== BADGES ====== */
+.badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #fff;
+}
+.bg-success { background-color: #28a745; }
+.bg-danger { background-color: #dc3545; }
+
+/* ====== OUT OF STOCK SECTION ====== */
+.out-of-stock-section {
+    margin-top: 50px;
+    padding: 20px;
+    background: #FFF0F0;
+    border-radius: 12px;
+    border-left: 5px solid #D9534F;
+}
+.out-of-stock-section h3 {
+    color: #D9534F;
+    margin-bottom: 20px;
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 768px) {
+    .menu-img { width: 50px; height: 50px; }
+}
+</style>
+
+<div class="container">
+    <header>
+        <h1>🍽 Today's Menu</h1>
+        <p class="description">View today's available menu items</p>
+    </header>
+
+    <div class="main-content">
+        <!-- Available Items -->
+        {% if categorized_available %}
+            {% for category, items in categorized_available.items %}
+                <div class="category-header">{{ category|title }}</div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Available Qty</th>
+                            <th>Image</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for item in items %}
+                        <tr>
+                            <td><strong>{{ item.name }}</strong></td>
+                            <td style="color:#555; font-size:0.85rem;">{{ item.description|truncatewords:12 }}</td>
+                            <td>₹{{ item.price }}</td>
+                            <td>{{ item.available_quantity }}</td>
+                            <td>
+                                {% if item.image %}
+                                    <img src="{{ item.image.url }}" alt="{{ item.name }}" class="menu-img">
+                                {% else %}
+                                    <span style="color:#aaa;">No image</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <span class="badge bg-success">Available</span>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="6" style="text-align:center; color:#aaa;">
+                                No available items in this category today.
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endfor %}
+        {% else %}
+            <p class="text-center" style="color:#aaa; padding: 20px;">
+                No available menu items for today.
+            </p>
+        {% endif %}
+
+        <!-- Out of Stock Items -->
+        {% if categorized_out_of_stock %}
+        <div class="out-of-stock-section">
+            <h3>⛔ Currently Out of Stock</h3>
+            {% for category, items in categorized_out_of_stock.items %}
+                <div class="category-header" style="border-left-color: #D9534F;">{{ category|title }}</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Image</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in items %}
+                        <tr>
+                            <td><strong>{{ item.name }}</strong></td>
+                            <td style="color:#555; font-size:0.85rem;">{{ item.description|truncatewords:12 }}</td>
+                            <td>₹{{ item.price }}</td>
+                            <td>
+                                {% if item.image %}
+                                    <img src="{{ item.image.url }}" alt="{{ item.name }}" class="menu-img">
+                                {% else %}
+                                    <span style="color:#aaa;">No image</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <span class="badge bg-danger">Out of Stock</span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- If no items at all -->
+        {% if not categorized_available and not categorized_out_of_stock %}
+            <p class="text-center" style="color:#aaa; padding: 40px;">
+                No menu items available for today. Please add items with today's date.
+            </p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

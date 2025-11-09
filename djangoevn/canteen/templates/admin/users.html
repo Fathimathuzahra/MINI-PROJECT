@@ -1,0 +1,186 @@
+{% extends "admin/admin_base.html" %}
+{% block title %}Manage Users | College Canteen{% endblock %}
+
+{% block content %}
+<div class="content-wrapper">
+    <div class="content-header">
+        <h2><i class="fas fa-users"></i> Manage Users</h2>
+        <a href="{% url 'admin_add_user' %}" class="btn btn-add-user">
+            <i class="fas fa-user-plus"></i> Add New User
+        </a>
+    </div>
+
+    <div class="table-container">
+        <div class="table-responsive">
+            <table class="user-table">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Role</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.role|title }}</td>
+                        <td>
+                            {% if user.username != request.user.username %}
+                            <a href="{% url 'admin_delete_user' user.id %}" class="btn btn-delete" aria-label="Delete user {{ user.username }}">
+                                <i class="fas fa-trash-alt"></i> Delete
+                            </a>
+                            {% else %}
+                            <span class="text-muted">Cannot delete self</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="3" class="text-center">No users found.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<style>
+:root {
+    --primary-color: #8B4513;     /* Saddle brown */
+    --primary-dark: #6B3410;
+    --accent-color: #D2B48C;      /* Tan */
+    --bg-light: #FFF8F0;          /* Cream background */
+    --text-dark: #3E2723;         /* Deep brown */
+    --white: #fff;
+    --border-soft: #E7DCC7;
+    --hover-bg: #FBF2E6;
+    --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* ====== Page Layout ====== */
+.content-wrapper {
+    background: var(--bg-light);
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: var(--shadow-soft);
+    margin: 25px auto;
+    max-width: 1200px;
+}
+
+/* ====== Header ====== */
+.content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.content-header h2 {
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 1.7rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* ====== Table ====== */
+.table-container {
+    overflow-x: auto;
+}
+
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--border-soft);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.user-table th, .user-table td {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border-soft);
+    text-align: left;
+}
+
+.user-table th {
+    background: var(--primary-color);
+    color: var(--white);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.user-table tr:nth-child(even) td {
+    background: #FFF4E8;
+}
+
+.user-table tr:hover td {
+    background: var(--hover-bg);
+    transition: 0.3s ease;
+}
+
+/* ====== Buttons ====== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 20px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-add-user {
+    background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+    color: var(--white);
+}
+
+.btn-add-user:hover {
+    background: var(--primary-dark);
+    transform: scale(1.05);
+}
+
+.btn-delete {
+    background: linear-gradient(135deg, #D96B5C, var(--primary-color));
+    color: var(--white);
+    padding: 8px 16px;
+}
+
+.btn-delete:hover {
+    background: var(--primary-dark);
+    transform: scale(1.05);
+}
+
+/* ====== Text ====== */
+.text-center {
+    text-align: center;
+    color: var(--text-dark);
+}
+
+.text-muted {
+    color: #a08b75;
+}
+
+/* ====== Responsive ====== */
+@media (max-width: 768px) {
+    .content-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    .user-table th, .user-table td {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+}
+</style>
+{% endblock %}

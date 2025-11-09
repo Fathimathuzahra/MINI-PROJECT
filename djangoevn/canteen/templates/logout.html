@@ -1,0 +1,208 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Logged Out | Cafeteria{% endblock %}
+{% block nav_home %}{% endblock %}
+{% block nav_menu %}{% endblock %}
+{% block nav_about %}{% endblock %}
+
+{% block extra_css %}
+<style>
+/* =========================================
+   LOGOUT PAGE STYLING
+========================================= */
+.hero-area {
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    min-height: 100vh; 
+    padding: 120px 0 80px;
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+                url('{% static "images/20.jpg" %}') no-repeat center center/cover;
+    border-radius: 0 0 30px 30px;
+}
+
+.form-wrapper { 
+    width: 100%; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+}
+
+.form-container {
+    background: var(--bg-cream); 
+    padding: 50px 40px; 
+    border-radius: 25px; 
+    box-shadow: var(--shadow-strong);
+    width: 400px; 
+    border: 2px solid var(--primary-accent); 
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.form-container:hover { 
+    transform: translateY(-5px); 
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2); 
+}
+
+.form-icon { 
+    text-align: center; 
+    margin-bottom: 20px; 
+}
+
+.form-icon i { 
+    font-size: 50px; 
+    color: var(--primary-accent); 
+    background: var(--bg-light); 
+    padding: 15px; 
+    border-radius: 50%; 
+    border: 2px solid var(--primary-accent);
+    box-shadow: var(--shadow-soft);
+}
+
+.form-container h2 { 
+    text-align: center; 
+    margin-bottom: 20px; 
+    font-size: 32px; 
+    font-weight: 600; 
+    color: var(--primary-accent); 
+}
+
+.form-container p { 
+    text-align: center; 
+    margin-bottom: 25px; 
+    font-size: 16px; 
+    color: var(--text-medium);
+    line-height: 1.6;
+}
+
+.site-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%; 
+    padding: 15px; 
+    border: none; 
+    border-radius: 12px;
+    background: var(--gradient-primary);
+    color: var(--text-white); 
+    font-weight: 600; 
+    font-size: 16px; 
+    cursor: pointer; 
+    margin-top: 10px; 
+    box-shadow: var(--shadow-medium); 
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.site-btn:hover { 
+    background: var(--gradient-accent); 
+    transform: translateY(-3px); 
+    box-shadow: 0 10px 25px rgba(139,69,19,0.4);
+    color: var(--text-white);
+    text-decoration: none;
+}
+
+.additional-links {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.additional-links a {
+    color: var(--secondary-accent);
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid transparent;
+}
+
+.additional-links a:hover {
+    color: var(--hover-accent);
+    background: rgba(139,69,19,0.1);
+    border-color: rgba(139,69,19,0.2);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .hero-area {
+        padding: 100px 20px 60px;
+        min-height: 80vh;
+    }
+    
+    .form-container { 
+        width: 90%; 
+        padding: 40px 30px; 
+    }
+    
+    .additional-links {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+    
+    .additional-links a {
+        width: 100%;
+        justify-content: center;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="hero-area" data-aos="fade-up">
+    <div class="form-wrapper">
+        <div class="form-container">
+            <div class="form-icon">
+                <i class="fas fa-sign-out-alt"></i>
+            </div>
+            <h2>Logged Out</h2>
+            <p>You've been successfully logged out from the Cafeteria Portal.</p>
+            
+            <a href="{% url 'login' %}" class="site-btn">
+                <i class="fas fa-sign-in-alt"></i>
+                Login Again
+            </a>
+            
+            <div class="additional-links">
+                <a href="{% url 'index' %}">
+                    <i class="fas fa-home"></i>
+                    Back to Home
+                </a>
+                <a href="{% url 'register' %}">
+                    <i class="fas fa-user-plus"></i>
+                    Create Account
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Additional animations for logout page
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add fade-in animation to form elements
+        const formContainer = document.querySelector('.form-container');
+        if (formContainer) {
+            formContainer.style.opacity = '0';
+            formContainer.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                formContainer.style.transition = 'all 0.6s ease';
+                formContainer.style.opacity = '1';
+                formContainer.style.transform = 'translateY(0)';
+            }, 300);
+        }
+    });
+</script>
+{% endblock %}
